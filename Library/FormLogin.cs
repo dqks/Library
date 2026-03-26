@@ -37,6 +37,7 @@ namespace Library
                 else
                 {
                     MessageBox.Show("Неправильный логин или пароль", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
                 }
             }
 
@@ -44,14 +45,12 @@ namespace Library
 
         private void ButtonGuest_Click(object sender, EventArgs e)
         {
-
             this.IsGuest = true;
             this.User = null;
 
             FormBooks form = new FormBooks(this.IsGuest, this.User);
             form.Show();
             this.Hide();
-
         }
     }
 }
