@@ -53,38 +53,46 @@ namespace Library
 
         private void LoadBooks()
         {
-
-            using (var db = new LibraryShtinContext())
+            try
             {
-
-                var books = db.Books
-                    .Include(i => i.IdAuthorNavigation)
-                    .Include(i => i.IdGenreNavigation)
-                    .Include(i => i.IdPublisherNavigation)
-                    .ToList();
-
-                foreach (var book in books)
+                using (var db = new LibraryShtinContext())
                 {
-                    var rowIndex = dataGridViewBooks.Rows.Add();
-                    var row = dataGridViewBooks.Rows[rowIndex];
 
+                    var books = db.Books
+                        .Include(i => i.IdAuthorNavigation)
+                        .Include(i => i.IdGenreNavigation)
+                        .Include(i => i.IdPublisherNavigation)
+                        .ToList();
 
-                    row.Cells["colPhoto"].Value = Resources.book_placeholder;
-
-                    row.Cells["colText"].Value = LoadColText(book);
-
-                    if (book.Available <= 0)
+                    foreach (var book in books)
                     {
-                        row.DefaultCellStyle.BackColor = ColorTranslator.FromHtml("#FFCCCC");
-                    }
-                    else if (book.Available == 1 || book.Available == 2)
-                    {
-                        row.DefaultCellStyle.BackColor = ColorTranslator.FromHtml("#FFF3CD");
+                        var rowIndex = dataGridViewBooks.Rows.Add();
+                        var row = dataGridViewBooks.Rows[rowIndex];
+
+
+                        row.Cells["colPhoto"].Value = Resources.book_placeholder;
+
+                        row.Cells["colText"].Value = LoadColText(book);
+
+                        if (book.Available <= 0)
+                        {
+                            row.DefaultCellStyle.BackColor = ColorTranslator.FromHtml("#FFCCCC");
+                        }
+                        else if (book.Available == 1 || book.Available == 2)
+                        {
+                            row.DefaultCellStyle.BackColor = ColorTranslator.FromHtml("#FFF3CD");
+
+                        }
 
                     }
-
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+
 
         }
 
