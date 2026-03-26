@@ -104,7 +104,7 @@
             Margin = new Padding(4);
             Name = "FormBooks";
             Padding = new Padding(10);
-            Text = "FormBooks";
+            Text = "Книги";
             panelTop.ResumeLayout(false);
             panelTop.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewBooks).EndInit();
